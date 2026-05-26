@@ -1,0 +1,14 @@
+{
+  "name": "mclpocs",
+  "private": true,
+  "version": "0.1.0",
+  "description": "MCP proof-of-concept experiments across frameworks.",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w @mclpocs/backend-api",
+    "build:api": "npm run build -w @mclpocs/backend-api",
+    "start:api": "npm run start -w @mclpocs/backend-api"
+  }
+}
