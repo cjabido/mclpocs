@@ -9,6 +9,8 @@
   "scripts": {
     "dev:api": "npm run dev -w @mclpocs/backend-api",
     "build:api": "npm run build -w @mclpocs/backend-api",
-    "start:api": "npm run start -w @mclpocs/backend-api"
+    "start:api": "npm run start -w @mclpocs/backend-api",
+    "dev:mcp:spring": "cd apps/spring-mcp-server && JAVA_HOME=${JAVA_HOME:-/Users/cjabido/Library/Java/JavaVirtualMachines/openjdk-26.0.1/Contents/Home} mvn spring-boot:run",
+    "build:mcp:spring": "cd apps/spring-mcp-server && JAVA_HOME=${JAVA_HOME:-/Users/cjabido/Library/Java/JavaVirtualMachines/openjdk-26.0.1/Contents/Home} mvn test"
   }
 }

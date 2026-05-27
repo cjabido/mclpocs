@@ -1,6 +1,6 @@
 import cors from "cors";
 import express, { type ErrorRequestHandler } from "express";
-import { createItemsRouter } from "./routes/items.js";
+import { createRecordsRouter } from "./routes/records.js";
 
 export function createApp(): express.Express {
   const app = express();
@@ -12,7 +12,7 @@ export function createApp(): express.Express {
     response.json({ status: "ok" });
   });
 
-  app.use("/api/items", createItemsRouter());
+  app.use("/api/records", createRecordsRouter());
   app.use(notFoundHandler);
   app.use(errorHandler);
 

@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-mcp-server
+  ai:
+    mcp:
+      server:
+        name: spring-records-mcp-server
+        version: 0.1.0
+        type: SYNC
+        protocol: STREAMABLE
+
+records:
+  api:
+    base-url: http://localhost:3000
