@@ -45,3 +45,55 @@ The MCP server requires Java 21+ and Maven. The npm scripts default `JAVA_HOME` 
 - `create_record`
 - `update_record`
 - `delete_record`
+
+### Test with MCP Inspector
+
+Start the backend API and Spring MCP server in separate terminals:
+
+```bash
+npm run dev:api
+npm run dev:mcp:spring
+```
+
+Then start MCP Inspector:
+
+```bash
+npx @modelcontextprotocol/inspector
+```
+
+In the Inspector UI:
+
+1. Open `http://localhost:6274`.
+2. Select `Streamable HTTP` as the transport type.
+3. Enter `http://localhost:8080/mcp` as the server URL.
+4. Click `Connect`.
+5. Open `Tools` and click `List Tools`.
+
+Try `create_record` with:
+
+```json
+{
+  "name": "Inspector test",
+  "data": {
+    "source": "mcp-inspector",
+    "framework": "spring"
+  }
+}
+```
+
+Then run `list_records` to confirm the record was persisted by the backend API.
+
+You can also test from the Inspector CLI:
+
+```bash
+npx @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transport http --method tools/list
+```
+
+```bash
+npx @modelcontextprotocol/inspector --cli http://localhost:8080/mcp \
+  --transport http \
+  --method tools/call \
+  --tool-name create_record \
+  --tool-arg name="Inspector CLI test" \
+  --tool-arg 'data={"source":"inspector-cli"}'
+```
