@@ -10,7 +10,7 @@ spring:
         name: spring-records-mcp-server
         version: 0.1.0
         type: SYNC
-        protocol: STREAMABLE
+        protocol: STATELESS
 
 records:
   api:

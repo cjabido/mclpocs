@@ -5,7 +5,7 @@ This repository stores multiple MCP experiments across frameworks.
 ## Projects
 
 - `apps/backend-api` — simple backend data-store API for future experiments.
-- `apps/spring-mcp-server` — Java Spring MCP server exposing the backend records API as Streamable HTTP tools.
+- `apps/spring-mcp-server` — Java Spring MCP server exposing the backend records API as stateless HTTP tools.
 
 ## Backend API
 
@@ -29,7 +29,7 @@ Records are stored in `apps/backend-api/data/records.json`.
 
 ## Spring MCP Server
 
-The Spring MCP server exposes the shared records API as MCP tools over Streamable HTTP.
+The Spring MCP server exposes the shared records API as MCP tools over stateless HTTP.
 
 ```bash
 npm run dev:api
@@ -82,6 +82,52 @@ Try `create_record` with:
 ```
 
 Then run `list_records` to confirm the record was persisted by the backend API.
+
+### Install to MCP Clients
+
+With both services running, add the server to any MCP-compatible client using `http://localhost:8080/mcp` as the endpoint.
+
+#### Claude Desktop
+
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "spring-records": {
+      "url": "http://localhost:8080/mcp"
+    }
+  }
+}
+```
+
+Restart Claude Desktop to pick up the change. The five records tools will appear in the tools panel.
+
+#### Cursor
+
+Open **Cursor Settings → MCP** and add a new server:
+
+```json
+{
+  "spring-records": {
+    "url": "http://localhost:8080/mcp"
+  }
+}
+```
+
+#### VS Code (GitHub Copilot)
+
+Add to `.vscode/mcp.json` in your workspace:
+
+```json
+{
+  "servers": {
+    "spring-records": {
+      "url": "http://localhost:8080/mcp"
+    }
+  }
+}
+```
 
 You can also test from the Inspector CLI:
 
