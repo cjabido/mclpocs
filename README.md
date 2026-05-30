@@ -6,6 +6,7 @@ This repository stores multiple MCP experiments across frameworks.
 
 - `apps/backend-api` — simple backend data-store API for future experiments.
 - `apps/spring-mcp-server` — Java Spring MCP server exposing the backend records API as stateless HTTP tools.
+- `apps/color-picker-mcp-server` — MCP App with an interactive color picker UI (color wheel, HSL sliders, hex/RGB/HSL readouts).
 
 ## Backend API
 
@@ -129,7 +130,7 @@ Add to `.vscode/mcp.json` in your workspace:
 }
 ```
 
-You can also test from the Inspector CLI:
+#### Inspector CLI
 
 ```bash
 npx @modelcontextprotocol/inspector --cli http://localhost:8080/mcp --transport http --method tools/list
@@ -143,3 +144,66 @@ npx @modelcontextprotocol/inspector --cli http://localhost:8080/mcp \
   --tool-arg name="Inspector CLI test" \
   --tool-arg 'data={"source":"inspector-cli"}'
 ```
+
+---
+
+## Color Picker MCP App
+
+An [MCP App](https://github.com/modelcontextprotocol/ext-apps) with an interactive color picker UI. Hosts that support MCP Apps (e.g. Claude Desktop) render a live color wheel, HSL sliders, and hex/RGB/HSL readouts. When the user clicks **"Use this color"**, the selected color is sent back to the conversation. In non-UI clients the tool still works — it just returns a text description.
+
+### Start
+
+```bash
+npm install
+npm run dev:mcp:color-picker   # http://localhost:3002/mcp
+```
+
+### Test with MCP Inspector
+
+```bash
+npx @modelcontextprotocol/inspector
+```
+
+1. Open `http://localhost:6274`.
+2. Select `Streamable HTTP` and enter `http://localhost:3002/mcp`.
+3. Click `Connect`, then open the **Tools** tab.
+4. Call `color-picker` (optionally pass `{ "initialColor": "#ff6600" }`).
+
+### Install to Claude Desktop
+
+Claude Desktop supports the full MCP Apps interactive UI.
+
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "color-picker": {
+      "url": "http://localhost:3002/mcp"
+    }
+  }
+}
+```
+
+Restart Claude Desktop. Ask Claude to **"open the color picker"** — a live color wheel and sliders will appear inline. Pick a color and click **"Use this color"** to inject the values into the conversation.
+
+### Install to ChatGPT Desktop
+
+ChatGPT Desktop supports MCP tools but does not render the MCP Apps interactive UI. The `color-picker` tool will still execute and return the initial color as a text response; the color wheel will not appear.
+
+Edit `~/Library/Application Support/ChatGPT/mcp_servers.json` (create it if it doesn't exist):
+
+```json
+{
+  "mcpServers": {
+    "color-picker": {
+      "url": "http://localhost:3002/mcp"
+    }
+  }
+}
+```
+
+Restart ChatGPT Desktop. You can then ask it to call the color picker tool directly.
+
+> **Note:** HTTP-based MCP server support in ChatGPT Desktop may require enabling it under **Settings → Tools**. If the JSON config approach doesn't work, add the server through that settings panel instead.
+

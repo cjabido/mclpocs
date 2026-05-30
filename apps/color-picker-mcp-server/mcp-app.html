@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Color Picker</title>
+</head>
+<body>
+  <main class="main">
+    <h2 class="title">Color Picker</h2>
+
+    <div class="picker-area">
+      <input type="color" id="color-input" class="color-wheel" value="#3b82f6">
+      <div class="color-preview" id="color-preview"></div>
+    </div>
+
+    <div class="sliders">
+      <label class="slider-row">
+        <span class="slider-label">H</span>
+        <input type="range" id="hue" min="0" max="360" value="217" class="slider slider-hue">
+        <span class="slider-value" id="hue-val">217°</span>
+      </label>
+      <label class="slider-row">
+        <span class="slider-label">S</span>
+        <input type="range" id="sat" min="0" max="100" value="91" class="slider slider-sat">
+        <span class="slider-value" id="sat-val">91%</span>
+      </label>
+      <label class="slider-row">
+        <span class="slider-label">L</span>
+        <input type="range" id="lit" min="0" max="100" value="60" class="slider slider-lit">
+        <span class="slider-value" id="lit-val">60%</span>
+      </label>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-box">
+        <span class="value-label">HEX</span>
+        <code id="hex-display" class="value-text">#3b82f6</code>
+      </div>
+      <div class="value-box">
+        <span class="value-label">RGB</span>
+        <code id="rgb-display" class="value-text">59, 130, 246</code>
+      </div>
+      <div class="value-box">
+        <span class="value-label">HSL</span>
+        <code id="hsl-display" class="value-text">217°, 91%, 60%</code>
+      </div>
+    </div>
+
+    <button id="use-color-btn" class="use-btn">Use this color</button>
+    <p id="status" class="status"></p>
+  </main>
+  <script type="module" src="/src/mcp-app.ts"></script>
+</body>
+</html>

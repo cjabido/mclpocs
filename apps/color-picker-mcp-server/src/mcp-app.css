@@ -1,0 +1,190 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1rem;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-heading-xl-size);
+  line-height: var(--font-heading-xl-line-height);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+/* ── Color wheel + preview ─────────────────────────────── */
+.picker-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.color-wheel {
+  width: 160px;
+  height: 160px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+/* Remove default browser chrome on the color input */
+.color-wheel::-webkit-color-swatch-wrapper { padding: 0; }
+.color-wheel::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.color-wheel::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+.color-preview {
+  width: 100%;
+  height: 56px;
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--color-border);
+  transition: background-color 0.1s ease;
+}
+
+/* ── HSL sliders ─────────────────────────────────────────── */
+.sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.slider-row {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr 3rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slider-label {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.slider-value {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color-ring-primary);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color-ring-primary);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+/* Hue slider — rainbow gradient */
+.slider-hue {
+  background: linear-gradient(to right,
+    hsl(0,100%,50%), hsl(30,100%,50%), hsl(60,100%,50%), hsl(90,100%,50%),
+    hsl(120,100%,50%), hsl(150,100%,50%), hsl(180,100%,50%), hsl(210,100%,50%),
+    hsl(240,100%,50%), hsl(270,100%,50%), hsl(300,100%,50%), hsl(330,100%,50%),
+    hsl(360,100%,50%)
+  );
+}
+
+/* ── Value boxes ─────────────────────────────────────────── */
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.value-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: 0.5rem 0.25rem;
+}
+
+.value-label {
+  font-size: 0.65rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.value-text {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-primary);
+  word-break: break-all;
+  text-align: center;
+}
+
+/* ── Use button ─────────────────────────────────────────── */
+.use-btn {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: var(--border-radius-md);
+  background: var(--color-ring-primary);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.use-btn:hover { opacity: 0.9; }
+.use-btn:active { transform: scale(0.98); }
+.use-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Status line ─────────────────────────────────────────── */
+.status {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  min-height: 1.2em;
+}
